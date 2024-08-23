@@ -137,7 +137,7 @@
 
 氢ICP备案系统遵循Apache2开源协议发布，并提供免费使用。
 
-版权所有Copyright © 2023-2024 云梦次元（http://www.whitedream.cn）x 云梦科创（http://cloudream.top）
+版权所有Copyright © 2023-2024 云梦科创（http://cloudream.top/）
 
 ## 修改部分
 前端的部分页面

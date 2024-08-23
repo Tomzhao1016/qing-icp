@@ -29,30 +29,46 @@
                     <label for="email">邮箱</label>
                     <input type="email" id="email" class="front-input" maxlength="25">
                 </div>
+                <div>
+                    <label for="captcha">验证码</label>
+                    <input type="text" id="captcha" class="front-input" maxlength="4">
+                    <img src="{:url('user/register/generateCaptcha')}" alt="验证码" id="captcha-img" onclick="refreshCaptcha()">
+                </div>
                 <button type="button" class="front-button" onclick="reg()">注册</button>
             </div>
             <div id="tip_list"></div>
         </div>
         <script type="application/javascript">
+            function refreshCaptcha() {
+                var captchaImg = document.getElementById('captcha-img');
+                captchaImg.src = "{:url('user/register/generateCaptcha')}?" + Math.random();
+            }
+
             function reg(){
                 var username = document.getElementById("username").value;
                 var displayname = document.getElementById("displayname").value;
                 var password = document.getElementById("password").value;
                 var repassword = document.getElementById("repassword").value;
                 var email = document.getElementById("email").value;
-                if(repassword!==password) document.getElementById("tip_list").innerHTML = "<h5 class=\"tip\">确认密码与密码不相同</h5>";
-                else {
+                var captcha = document.getElementById("captcha").value;
+                if(repassword!==password) {
+                    document.getElementById("tip_list").innerHTML = "<h5 class=\"tip\">确认密码与密码不相同</h5>";
+                } else {
                     fetch("/user.php/register/info_check", {
                         method: "post",
                         headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                        body: `username=${username}&&password=${password}&&displayname=${displayname}&&email=${email}&&number={$number}`
+                        body: `username=${username}&password=${password}&displayname=${displayname}&email=${email}&number={$number}&captcha=${captcha}`
                     })
-                        .then(res => res.text())
-                        .then(function (res) {
-                            var zz = /ok;.+/;
-                            if (zz.test(res)) window.open("/user.php/register/end?n={$number}&i=" + res, "_self");
-                            else document.getElementById("tip_list").innerHTML = "<h5 class=\"tip\">" + res + "</h5>";
-                        })
+                    .then(res => res.text())
+                    .then(function (res) {
+                        var zz = /ok;.+/;
+                        if (zz.test(res)) {
+                            window.open("/user.php/register/end?n={$number}&i=" + res, "_self");
+                        } else {
+                            document.getElementById("tip_list").innerHTML = "<h5 class=\"tip\">" + res + "</h5>";
+                            refreshCaptcha(); // 刷新验证码
+                        }
+                    })
                 }
             }
         </script>

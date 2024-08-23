@@ -79,6 +79,35 @@ class Icp extends Controller
             else return "no permissions";
         }else return "login error";
     }
+    public function ok($id){
+        if (Session::has("login")) {
+            $user = Db::table("icp_users")->where("id",Session::get("login"))->find();
+            if($user["u_type"] > 0) Db::table("icp_list")->where("icp_number",$id)->update(["icp_status"=>"正常"]);
+            if($user["u_type"] > 0) Db::table("icp_list")->where("icp_number",$id)->update(["is_remove"=>0]);
+            else return "no permissions";
+        }else return "login error";
+    }
+    public function err($id){
+        if (Session::has("login")) {
+            $user = Db::table("icp_users")->where("id",Session::get("login"))->find();
+            if($user["u_type"] > 0) Db::table("icp_list")->where("icp_number",$id)->update(["icp_status"=>"失效"]);
+            else return "no permissions";
+        }else return "login error";
+    }
+    public function icperr($id){
+        if (Session::has("login")) {
+            $user = Db::table("icp_users")->where("id",Session::get("login"))->find();
+            if($user["u_type"] > 0) Db::table("icp_list")->where("icp_number",$id)->update(["icp_status"=>"审核未通过"]);
+            else return "no permissions";
+        }else return "login error";
+    }
+    public function report($id){
+        if (Session::has("login")) {
+            $user = Db::table("icp_users")->where("id",Session::get("login"))->find();
+            if($user["u_type"] > 0) Db::table("icp_list")->where("icp_number",$id)->update(["icp_status"=>"违规"]);
+            else return "no permissions";
+        }else return "login error";
+    }
     public function del_sure($id){
         if (Session::has("login")) {
             $user = Db::table("icp_users")->where("id",Session::get("login"))->find();

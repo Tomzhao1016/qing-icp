@@ -44,7 +44,7 @@
                                         <td><div class="badge" id="icp-status-{$vo.icp_number}">{if $vo.is_remove == 1}<span style="color:red">已删除</span>{else /}{$vo.icp_status}{/if}</div></td>
                                         <td>{php}echo date('Y-m-d H:i:s',$vo["icp_time"]);{/php}</td>
                                         <td>{$vo.icp_number}</td>
-                                        <td><button onclick="del({$vo.icp_number})" class="btn btn-warning">撤销</button><button onclick="del_sure({$vo.icp_number})" style="margin-left: 3px;" class="btn btn-danger">永久删除</button></td>
+                                        <td><button onclick="ok({$vo.icp_number})" class="btn btn-warning">正常</button><button onclick="err({$vo.icp_number})" class="btn btn-warning">失效</button><button onclick="icperr({$vo.icp_number})" class="btn btn-warning">审核未通过</button><button onclick="report({$vo.icp_number})" class="btn btn-warning">违规</button><button onclick="del({$vo.icp_number})" class="btn btn-warning">撤销(保留号码)</button><button onclick="del_sure({$vo.icp_number})" style="margin-left: 3px;" class="btn btn-danger">永久删除</button></td>
                                         <td></td>
                                     </tr>
                                 {/volist}
@@ -53,6 +53,78 @@
                                 {php}echo $icp_list->render();{/php}
                             </div>
                             <script type="application/javascript">
+                                function err(id){
+                                    swal("你确定要设置失效吗",{
+                                        buttons: {
+                                            cancel: true,
+                                            confirm: {
+                                                text: "确认",
+                                                value: "yes",
+                                            },
+                                        },
+                                    }).then((value) => {
+                                        if(value === "yes") {
+                                            fetch(`/admin.php/icp/ok?id=${id}`)
+                                            swal("完成","").then(() => {
+                                                document.getElementById("icp-status-"+id).innerHTML = `<span>失效</span>`;
+                                            })
+                                        }
+                                    });
+                                }
+                                function icperr(id){
+                                    swal("你确定要设置未通过吗",{
+                                        buttons: {
+                                            cancel: true,
+                                            confirm: {
+                                                text: "确认",
+                                                value: "yes",
+                                            },
+                                        },
+                                    }).then((value) => {
+                                        if(value === "yes") {
+                                            fetch(`/admin.php/icp/icperr?id=${id}`)
+                                            swal("完成","").then(() => {
+                                                document.getElementById("icp-status-"+id).innerHTML = `<span>审核未通过</span>`;
+                                            })
+                                        }
+                                    });
+                                }
+                                function ok(id){
+                                    swal("你确定要设置正常吗",{
+                                        buttons: {
+                                            cancel: true,
+                                            confirm: {
+                                                text: "确认",
+                                                value: "yes",
+                                            },
+                                        },
+                                    }).then((value) => {
+                                        if(value === "yes") {
+                                            fetch(`/admin.php/icp/ok?id=${id}`)
+                                            swal("完成","").then(() => {
+                                                document.getElementById("icp-status-"+id).innerHTML = `<span>正常</span>`;
+                                            })
+                                        }
+                                    });
+                                }
+                                function report(id){
+                                    swal("你确定要设置违规吗",{
+                                        buttons: {
+                                            cancel: true,
+                                            confirm: {
+                                                text: "确认",
+                                                value: "yes",
+                                            },
+                                        },
+                                    }).then((value) => {
+                                        if(value === "yes") {
+                                            fetch(`/admin.php/icp/report?id=${id}`)
+                                            swal("完成","").then(() => {
+                                                document.getElementById("icp-status-"+id).innerHTML = `<span>违规</span>`;
+                                            })
+                                        }
+                                    });
+                                }
                                 function del(id){
                                     swal("你确定要删除吗",{
                                         buttons: {

@@ -1,6 +1,64 @@
 {include file='public/head'}
 {include file='public/nav'}
 <!-- Main Content -->
+
+    <style>
+        /* 弹窗的遮罩层样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* 弹窗内容样式 */
+        .modal-content {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 关闭按钮样式 */
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .modal-close:hover {
+            color: #000;
+        }
+
+        /* 按钮样式 */
+        .btn-danger {
+            background-color: #d9534f;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+        }
+    </style>
 <div class="main-content">
     <section class="section">
         <div class="section-header">
@@ -37,33 +95,40 @@
                                             <td><div class="badge">{$key.icp_status}</div></td>
                                             <td>{php}echo date('Y-m-d H:i:s',$key["icp_time"]);{/php}</td>
                                             <td>{$key.icp_number}</td>
-                                            <td><button onclick="del({$key.icp_number})" class="btn btn-danger">撤销备案</button></td>
+                                            <td><button class="btn btn-danger" onclick="openModal()">撤销备案</button></td>
                                         </tr>
+                                            <script>
+        // 打开弹窗函数
+        function openModal() {
+            document.getElementById('customModal').style.display = 'flex';
+        }
+
+        // 关闭弹窗函数
+        function closeModal() {
+            document.getElementById('customModal').style.display = 'none';
+        }
+
+        // 点击遮罩层关闭弹窗
+        document.getElementById('customModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+    
                                     {/if}
                                 {/foreach}
                             </table>
-                            <script type="application/javascript">
-                                function del(id){
-                                    swal("你确定要删除吗",{
-                                        buttons: {
-                                            cancel: true,
-                                            confirm: {
-                                                text: "确定！",
-                                                value: "yes",
-                                            },
-                                        },
-                                    }).then((value) => {
-                                        if(value === "yes") {
-                                            fetch(`/user.php/icp/del?id=${id}`)
-                                            swal("完成","已发送请求").then(() => {
-                                                document.getElementById("icp-"+id).remove()
-                                            })
-                                        }
-                                    });
-                                    iziToast.warning();
-                                }
-                            </script>
                         </div>
+                            <div class="modal-overlay" id="customModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <p>功能正在开发中，请发
+                <a href="https://ticket.tomzhao.top/index.php?a=add&category=3" target="_blank">工单</a>
+                处理撤销备案请求。
+            </p>
+        </div>
+    </div>
                     </div>
                 </div>
             </div>

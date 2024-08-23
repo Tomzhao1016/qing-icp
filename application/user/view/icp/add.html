@@ -11,6 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
+                            <p>注意：备案号规则为年份+数字，其他申请不予通过。</p>
                             <label>备案号</label>
                             <input type="text" class="form-control" id="icp_number" maxlength="18" oninput="update_number()">
                             <br />
@@ -38,6 +39,9 @@
                         </div>
                         <div class="form-group">
                             <button type="button" onclick="reg()" class="btn btn-secondary">申请</button>
+                        </div>
+                        <div class="form-group">
+                            <p>备案完成后记得发送<a href="https://ticket.tomzhao.top/" target="_blank">工单</a>提醒管理员审核！</p>
                         </div>
                         <div id="tip_list"></div>
                     </div>

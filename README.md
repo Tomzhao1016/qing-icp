@@ -1,17 +1,13 @@
-云梦次元ICP备案系统
+氢ICP备案系统
 ===============
 
-[![Stars](https://badgen.net/github/stars/huicat28/yundream-icp?style=flat-square)](https://github.com/huicat28/yundream-icp)
-[![Latest Stable Version](https://badgen.net/github/release/huicat28/yundream-icp?style=flat-square)](https://github.com/huicat28/yundream-icp/releases)
-[![PHP Version](https://img.shields.io/badge/php-%3E%3D5.6-8892BF.svg?style=flat-square)](http://www.php.net/)
 
 ### 提示：本系统仅能用于娱乐性质！！！！！
 
 ## 源码介绍
 
-![介绍图](https://github.com/huicat28/yundream-icp/blob/master/README.png?raw=true)
 
-[演示站点](http://demo.icp.project.whitedream.cn)
+[演示站点](https://icp.tomzhao.top/)
 
 本源码为模仿萌国ICP备案系统，目的是让各位可以自己搭建一个自己的“ICP备案”。
 
@@ -19,22 +15,16 @@
 
 ## 安装教程
 
-~~1.将根目录下的`database.sql`导入到数据库中~~
+1.使用编辑器将根目录下的`database.sql`修改数据库中的“icp_settings”表中的内容为您的网站信息，并导入到数据库中
 
-~~2.修改`config\database.php`文件，填写自己的数据库信息~~
+2.修改`config\database.php`文件，填写自己的数据库信息
 
-~~3.修改站点配置，将运行目录设置为`/public`文件夹~~
+3.修改站点配置，将运行目录设置为`/public`文件夹
 
-~~4.修改伪静态设置，选择`Thinkphp`伪静态配置文件~~
-
-访问`你的网站域名/install.php`并按照提示进行安装
+4.修改伪静态设置，选择`Thinkphp`伪静态配置文件
 
 ## QA
 
-### 从老版本升级过来要重新安装怎么办
-
-#### 解决方法
-在网站根目录创建一个名叫`install`的文件，不要写扩展名。在里面写上`come的喂，ABC！v1.1.2`。
 
 ## 定制教程
 
@@ -61,12 +51,6 @@
 修改`home.html`可以DIY一个自己的首页
 
 修改`where.html`可以DIY每个备案字段的显示出来的名称
-
-#### 安装程序
-
-`application\public\view\install`文件夹中存放：
-
-这个不会有人闲着没事改吧
 
 #### 各种乱七八糟的引用
 
@@ -151,10 +135,13 @@
 
 ## 版权信息
 
-云梦次元ICP备案系统遵循Apache2开源协议发布，并提供免费使用。
+氢ICP备案系统遵循Apache2开源协议发布，并提供免费使用。
 
-版权所有Copyright © 2023 by 云梦次元（http://www.whitedream.cn）
+版权所有Copyright © 2023-2024 云梦次元（http://www.whitedream.cn）x 云梦科创（http://cloudream.top）
 
+## 修改部分
+前端的部分页面
+管理员后台
 ---
 
 本项目包含的第三方源码：

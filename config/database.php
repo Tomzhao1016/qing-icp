@@ -13,13 +13,13 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '你的数据库地址',
+    'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => '你的数据库名称',
+    'database'        => 'icp',
     // 用户名
-    'username'        => '你的数据库登录用户名',
+    'username'        => 'icp',
     // 密码
-    'password'        => '你的数据库登录密码',
+    'password'        => '123qweasd',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
